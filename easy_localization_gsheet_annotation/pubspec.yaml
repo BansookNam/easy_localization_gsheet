@@ -1,0 +1,8 @@
+name: easy_localization_gsheet_annotation
+description: Annotation for easy_localization_gsheet. Contains the @SheetLocalization annotation consumed by the code generator; safe to add as a regular dependency.
+version: 0.4.1
+homepage: https://github.com/BansookNam/easy_localization_gsheet
+issue_tracker: https://github.com/BansookNam/easy_localization_gsheet/issues
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'

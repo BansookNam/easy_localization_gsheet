@@ -9,8 +9,9 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:source_gen/source_gen.dart';
 
+import 'package:easy_localization_gsheet_annotation/easy_localization_gsheet_annotation.dart';
+
 import 'csv_parser.dart';
-import 'sheet_localization.dart';
 
 class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
   static const _urlFormat =

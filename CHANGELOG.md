@@ -1,3 +1,6 @@
+## [0.4.1]
+- Split annotation package `easy_localization_gsheet_annotation`
+
 ## [0.3.5]
 - Renamed package to `easy_localization_gsheet`
 - Upgrade packages to latest

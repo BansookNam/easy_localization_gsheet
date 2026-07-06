@@ -1,1 +1,1 @@
-export 'src/sheet_localization.dart';
+export 'package:easy_localization_gsheet_annotation/easy_localization_gsheet_annotation.dart';
