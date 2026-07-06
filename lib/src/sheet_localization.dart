@@ -9,6 +9,15 @@ class SheetLocalization {
   final bool injectGenerationDateTime;
   final bool immediateTranslationEnabled;
 
+  /// If true, also writes one JSON translation file per sheet locale column
+  /// (e.g. `en_US` -> `en.json`) into [translationsOutDir], for consumption
+  /// by easy_localization's default asset loader.
+  final bool generateTranslationFiles;
+
+  /// Output directory for the per-locale JSON files written when
+  /// [generateTranslationFiles] is true.
+  final String translationsOutDir;
+
   const SheetLocalization({
     this.docId,
     this.version = 1,
@@ -18,5 +27,7 @@ class SheetLocalization {
     this.preservedKeywords = const [],
     this.injectGenerationDateTime = true,
     this.immediateTranslationEnabled = true,
+    this.generateTranslationFiles = false,
+    this.translationsOutDir = 'assets/translations',
   });
 }

@@ -41,6 +41,10 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
         .listValue
         .map((e) => e.toStringValue())
         .toList();
+    final generateTranslationFiles =
+        annotation.read('generateTranslationFiles').boolValue;
+    final translationsOutDir =
+        annotation.read('translationsOutDir').stringValue;
     final current = Directory.current;
     final output = Directory.fromUri(Uri.parse(outputDir));
     final outputPath =
@@ -60,6 +64,10 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
       classBuilder.writeln(csvParser.getSupportedLocales());
       classBuilder.writeln(csvParser.generateTranslationUsages(
           preservedKeywords, immediateTranslationEnabled));
+
+      if (generateTranslationFiles) {
+        _writeTranslationFiles(csvParser, current, translationsOutDir);
+      }
     }
 
     if (docId.isNull || docId.stringValue.isEmpty) {
@@ -94,6 +102,22 @@ class LocalizationGenerator extends GeneratorForAnnotation<SheetLocalization> {
     }
     classBuilder.writeln('}');
     return classBuilder.toString();
+  }
+
+  void _writeTranslationFiles(
+      CSVParser csvParser, Directory current, String translationsOutDir) {
+    final translationsDir =
+        Directory(path.join(current.path, translationsOutDir));
+    if (!translationsDir.existsSync()) {
+      translationsDir.createSync(recursive: true);
+    }
+
+    const encoder = JsonEncoder.withIndent('  ');
+    csvParser.buildLocaleTranslations().forEach((code, translations) {
+      final language = code.split('_').first;
+      final file = File(path.join(translationsDir.path, '$language.json'));
+      file.writeAsStringSync(encoder.convert(translations));
+    });
   }
 
   String formatDateWithOffset(DateTime date,

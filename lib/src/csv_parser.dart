@@ -19,6 +19,41 @@ class CSVParser {
     return 'static const supportedLocales = [\n${locales.join(',\n')}\n];';
   }
 
+  /// Raw locale column headers from the sheet, e.g. ['en_US', 'ko_KR'].
+  List<String> get localeCodes =>
+      lines.first.sublist(1, lines.first.length).map((e) => e.toString()).toList();
+
+  /// Builds one key-value map per locale column, nesting keys on '.'
+  /// (mirrors easy_localization's own dotted-key lookup), for writing out
+  /// as per-locale translation JSON files.
+  Map<String, Map<String, dynamic>> buildLocaleTranslations() {
+    final codes = localeCodes;
+    final Map<String, Map<String, dynamic>> result = {
+      for (final code in codes) code: <String, dynamic>{},
+    };
+
+    for (final row in lines.getRange(1, lines.length)) {
+      final String key = row.first.toString();
+      for (int i = 0; i < codes.length; i++) {
+        final columnIndex = i + 1;
+        if (columnIndex >= row.length) continue;
+        final value = row[columnIndex]?.toString() ?? '';
+        _setNestedValue(result[codes[i]]!, key.split('.'), value);
+      }
+    }
+    return result;
+  }
+
+  void _setNestedValue(
+      Map<String, dynamic> map, List<String> keyParts, String value) {
+    Map<String, dynamic> current = map;
+    for (int i = 0; i < keyParts.length - 1; i++) {
+      current = current.putIfAbsent(keyParts[i], () => <String, dynamic>{})
+          as Map<String, dynamic>;
+    }
+    current[keyParts.last] = value;
+  }
+
   String generateTranslationUsages(
       List<String?> preservedKeywords, bool immediateTranslationEnabled) {
     final List<Item> items = [];

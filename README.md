@@ -16,6 +16,8 @@ Download CSV file and generates the localization keys from an online Google Shee
 
 This tool inspired by [flutter_sheet_localization_generator](https://pub.dev/packages/flutter_sheet_localization_generator)
 
+> **Note:** This project is a fork version of [easy_localization_generator](https://pub.dev/packages/easy_localization_generator). For the original fork repository, visit [https://github.com/rinlv/easy_localization_generator](https://github.com/rinlv/easy_localization_generator)
+
 ### 🔩 Installation
 
 Add to your `pubspec.yaml`:
