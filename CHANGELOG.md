@@ -1,3 +1,6 @@
+## [0.5.0]
+- Support Flutter 3.41.9 / Dart 3.11
+
 ## [0.4.1]
 - Split annotation package `easy_localization_gsheet_annotation`
 
