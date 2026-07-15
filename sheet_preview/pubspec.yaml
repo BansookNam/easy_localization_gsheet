@@ -1,0 +1,25 @@
+name: sheet_preview
+description: "Internal macOS tool: preview an easy_localization_gsheet Google Sheet as a table and try out {arg}/plural values per key."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.6.0
+  csv: ^6.0.0
+  intl: ^0.20.2
+  cupertino_icons: ^1.0.8
+  window_manager: ^0.5.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
